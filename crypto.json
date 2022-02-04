@@ -1,0 +1,7 @@
+{
+  "cryptocurrencies":[
+    {"id": 1, "name": "Bitcoin", "symbol": "BTC", "price": 33823.23, "supply": 21000000, "category": "Coin", "date": "03-01-2009", "project": "???"},
+    {"id": 1, "name": "Bitcoin", "symbol": "BTC", "price": 33823.23, "supply": 21000000, "category": "Coin", "date": "03-01-2009", "project": "???"},
+    {"id": 1, "name": "Bitcoin", "symbol": "BTC", "price": 33823.23, "supply": 21000000, "category": "Coin", "date": "03-01-2009", "project": "???"}
+  ]
+}

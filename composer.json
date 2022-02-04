@@ -1,0 +1,14 @@
+{
+  "autoload": {
+    "psr-4": {
+      "Controllers\\": "app\\Controllers",
+      "Entity\\": "app\\Entity",
+      "App\\Models\\": "app\\Models",
+      "Util\\": "util",
+      "Configuration\\": "config"
+    }
+  },
+  "require": {
+    "filp/whoops": "^2.14"
+  }
+}
