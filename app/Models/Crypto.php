@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Crypto
+class Crypto extends Dbh
 {
     private $id;
     private $name;
@@ -11,19 +11,6 @@ class Crypto
     private $supply;
     private $category;
     private $date;
-    private $project;
-
-    public function __construct($id, $name, $symbol, $price, $supply, $category, $date, $project)
-    {
-        $this->id = $id;
-        $this->name = $name;
-        $this->symbol = $symbol;
-        $this->price = $price;
-        $this->supply = $supply;
-        $this->category = $category;
-        $this->date = $date;
-        $this->project = $project;
-    }
 
     public function getId()
     {
@@ -95,24 +82,40 @@ class Crypto
         $this->date = $date;
     }
 
-    public function getProject()
-    {
-        return $this->project;
-    }
-
-    public function setProject($project)
-    {
-        $this->project = $project;
-    }
-
     public function create(array $data)
     {
 
     }
 
-    public function read(int $id)
+    public function read()
     {
+        $sql = "SELECT * FROM crypto";
+        $list = [];
 
+        try {
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute();
+
+            while ($row = $stmt->fetch()) {
+                $crypto = new Crypto();
+                $crypto->id = $row['id'];
+                $crypto->name = $row['name'];
+                $crypto->symbol = $row['symbol'];
+                $crypto->price = $row['price'];
+                $crypto->supply = $row['supply'];
+                $crypto->category = $row['category'];
+                $crypto->date = $row['date'];
+
+                array_push($list, $crypto);
+            }
+        }
+
+        catch (PDOException $e) {
+            echo utf8_encode("Échec de select : " . $e->getMessage() . "\n");
+            die();
+        }
+
+        return $list;
     }
 
     public function update(int $id, array $data)

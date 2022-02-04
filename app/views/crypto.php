@@ -26,7 +26,6 @@
                 <th scope="col">Quantité</th>
                 <th scope="col">Catégorie</th>
                 <th scope="col">Date de création</th>
-                <th scope="col">Projet</th>
             </tr>
         </thead>
         <tbody>
@@ -34,13 +33,12 @@
                 for ($i = 0; $i < sizeof($list); $i++) {
                     echo '<tr>';
                     echo '<th scope="row">'.$list[$i]->getId().'</th>';
+                    echo '<td>'.$list[$i]->getName().'</td>';
                     echo '<td>'.$list[$i]->getSymbol().'</td>';
                     echo '<td>'.$list[$i]->getPrice().'</td>';
-                    echo '<td>'.$list[$i]->getSymbol().'</td>';
                     echo '<td>'.$list[$i]->getSupply().'</td>';
                     echo '<td>'.$list[$i]->getCategory().'</td>';
                     echo '<td>'.$list[$i]->getDate().'</td>';
-                    echo '<td>'.$list[$i]->getProject().'</td>';
                     echo '</tr>';
                 }
             ?>
