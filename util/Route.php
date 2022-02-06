@@ -9,12 +9,12 @@ class Route
 {
     public function __construct()
     {
-        $url = explode('/', $_SERVER['REQUEST_URI']); // Break the url into an array
+        $url = explode('/', $_SERVER['REQUEST_URI']);
         $nbParam = count($url);
 
         $namespace = Config::$default_namespace;
         $controller = $url[$nbParam - 2];
-        $method = $url[$nbParam - 1]; // TO DO: Find how to get the method
+        $method = $url[$nbParam - 1];
         $class = $namespace."\\".$controller;
 
         if (! class_exists($class)) {

@@ -82,9 +82,25 @@ class Crypto extends Dbh
         $this->date = $date;
     }
 
-    public function create(array $data)
+    public function create($id, $name, $symbol, $price, $supply, $category, $date)
     {
-
+        $sql="INSERT INTO crypto (id, name, symbol, price, supply, category, date)
+                VALUES (:id, :name, :symbol, :price, :supply, :category, :date)";
+        try {
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':symbol', $symbol);
+            $stmt->bindParam(':price', $price);
+            $stmt->bindParam(':supply', $supply);
+            $stmt->bindParam(':category', $category);
+            $stmt->bindParam(':date', $date);
+            $stmt->execute();
+        }
+        catch (PDOException $e) {
+            echo utf8_encode("Échec de select : " . $e->getMessage() . "\n");
+            die();
+        }
     }
 
     public function read()

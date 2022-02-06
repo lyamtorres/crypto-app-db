@@ -3,7 +3,6 @@
 namespace Controllers;
 
 use App\Models\Crypto;
-use App\Models\Dbh;
 use Util\View;
 
 class CryptoController
@@ -27,4 +26,5 @@ class CryptoController
 
         echo $this->view->render('crypto', compact('list'));
     }
+
 }
