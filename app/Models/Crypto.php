@@ -134,13 +134,57 @@ class Crypto extends Dbh
         return $list;
     }
 
-    public function update(int $id, array $data)
+    public function readOne(int $id)
     {
+        $sql = "SELECT * FROM crypto WHERE id = :id";
 
+        try {
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            if($stmt->execute()) {
+                return $stmt->fetch();
+            }
+
+        } catch (PDOException $e) {
+            echo utf8_encode("Echec de select : " . $e->getMessage() . "\n");
+            die();
+        }
+    }
+
+    public function update($id, $name, $symbol, $price, $supply, $category, $date)
+    {
+        $sql="UPDATE crypto
+            SET name = :name, symbol = :symbol, price = :price, supply = :supply, category = :category, date := date
+            WHERE id = :id";
+        try {
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':symbol', $symbol);
+            $stmt->bindParam(':price', $price);
+            $stmt->bindParam(':supply', $supply);
+            $stmt->bindParam(':category', $category);
+            $stmt->bindParam(':date', $date);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+        }
+        catch (PDOException $e) {
+            echo utf8_encode("Echec de select : " . $e->getMessage() . "\n");
+            die();
+        }
     }
 
     public function delete(int $id)
     {
+        $sql = "DELETE FROM crypto WHERE id = :id";
 
+        try {
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+        } catch (PDOException $e) {
+            echo utf8_encode("Echec de select : " . $e->getMessage() . "\n");
+            die();
+        }
     }
 }
